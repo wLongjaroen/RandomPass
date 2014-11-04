@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package randompass;
 
 /**
@@ -16,8 +15,12 @@ public class RandomPass {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+
         Input in = new Input();
         in.scan();
+        Generate ge = new Generate(in);
+        ge.randomType(in);
+        
     }
-    
+
 }

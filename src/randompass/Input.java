@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package randompass;
 
 import java.util.Scanner;
@@ -12,40 +11,45 @@ import java.util.Scanner;
  *
  * @author Administrator
  */
-abstract class input{
-     abstract void scan();
-}
 
-public class Input extends input{
-    
+
+public class Input  {
+
     private int length;
     private int amount;
-    
-    public Input(){
+
+    public Input() {
         this.length = 0;
         this.amount = 0;
     }
-    public Input(int length, int amount){
+
+    public Input(int length, int amount) {
         this.length = length;
         this.amount = amount;
     }
-    
-    @Override
-    public void scan(){
+
+        public void scan() {
         Scanner scan = new Scanner(System.in);
         boolean okay = true;
-        do
-        {
-            System.out.print("Enter amount password : ");
-            amount = scan.nextInt();
+        while (okay) {
             System.out.print("Enter length : ");
             length = scan.nextInt();
-            if(length < 6){
+            if (length < 6) {
                 System.out.println("This number isn't correct.");
-            }else{
+            } else {
                 okay = false;
             }
         }
-        while(okay);
+        System.out.print("Enter amount password : ");
+        amount = scan.nextInt();
     }
+
+    public int getLength() {
+        return length;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+        
 }
