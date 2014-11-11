@@ -19,7 +19,7 @@ public class RandomPass {
         Input in = new Input();
         in.scan();
         Generate ge = new Generate(in);
-        ge.randomType(in);
+        ge.selectType(in);
         
     }
 
