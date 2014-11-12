@@ -18,6 +18,41 @@ public class Generate extends Generating {
         }
     }
 
+    
+    // Create New Method for GUI
+        public void selectTypeForGUI(Input in) {
+        int count;
+        switch (in.getType()) {
+            case 0: {
+                for (count = 0; count < in.getAmount(); count++) {
+                    for (int j = 0; j < in.getLength(); j++) {
+                        int r = (int) (Math.random() * 10) % 2;
+                        this.randomChar(r, count);
+                    }
+                }
+                break;
+            }
+            case 1: {
+                for (count = 0; count < in.getAmount(); count++) {
+                    for (int j = 0; j < in.getLength(); j++) {
+                        this.randomNo(count);
+                    }
+                }
+                break;
+            }
+            case 2: {
+                for (count = 0; count < in.getAmount(); count++) {
+                    for (int j = 0; j < in.getLength(); j++) {
+                        int r = (int) (Math.random() * 10) % 3;
+                        this.randomCharandNo(r, count);
+                    }
+                }
+                break;
+            }
+
+        }
+    }
+        
     @Override
     public void selectType(Input in) {
         int count;
@@ -100,10 +135,13 @@ public class Generate extends Generating {
         }
     }
 
-    public void output(Input in) {
-        for (int i = 0; i < in.getAmount(); i++) {
-            System.out.println(pass[i]);
-        }
+    // for return generated key from Method
+    public String[] getKey() {
+        return this.pass;
     }
 
+    @Override
+    void output(Input in) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
