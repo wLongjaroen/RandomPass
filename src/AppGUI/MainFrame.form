@@ -48,32 +48,28 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
-              <Group type="102" alignment="0" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="Label2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="typeOption" min="-2" pref="100" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="genButton" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                          <Component id="reButton" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="Label1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="4" pref="4" max="-2" attributes="0"/>
                           <Component id="lengthOption" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="Label3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="nKeyOption" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="genButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Component id="reButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="nKey" max="32767" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -83,8 +79,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
                           <Component id="lengthOption" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="nKeyOption" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="Label3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="nKey" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="3" pref="3" max="-2" attributes="0"/>
@@ -171,20 +167,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lengthOptionActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JComboBox" name="nKeyOption">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="1"/>
-                <StringItem index="1" value="2"/>
-                <StringItem index="2" value="3"/>
-              </StringArray>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nKeyOptionActionPerformed"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JButton" name="genButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Generate"/>
@@ -210,6 +192,15 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Key type   : "/>
           </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="nKey">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Enter number of output"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="nKeyMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nKeyActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

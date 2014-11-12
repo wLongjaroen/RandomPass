@@ -5,6 +5,7 @@
  */
 package AppGUI;
 
+import javax.swing.JOptionPane;
 import randompass.*;
 
 /**
@@ -35,11 +36,11 @@ public class MainFrame extends javax.swing.JFrame {
         outTextArea = new javax.swing.JTextArea();
         typeOption = new javax.swing.JComboBox();
         lengthOption = new javax.swing.JComboBox();
-        nKeyOption = new javax.swing.JComboBox();
         genButton = new javax.swing.JButton();
         reButton = new javax.swing.JButton();
         Label1 = new javax.swing.JLabel();
         Label2 = new javax.swing.JLabel();
+        nKey = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simple Keygen");
@@ -65,13 +66,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        nKeyOption.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3" }));
-        nKeyOption.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nKeyOptionActionPerformed(evt);
-            }
-        });
-
         genButton.setText("Generate");
         genButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,31 +84,42 @@ public class MainFrame extends javax.swing.JFrame {
 
         Label2.setText("Key type   : ");
 
+        nKey.setText("Enter number of output");
+        nKey.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nKeyMouseClicked(evt);
+            }
+        });
+        nKey.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nKeyActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Label2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(typeOption, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(typeOption, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(genButton)
+                        .addGap(6, 6, 6)
+                        .addComponent(reButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Label1)
                         .addGap(4, 4, 4)
-                        .addComponent(lengthOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lengthOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(Label3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(nKeyOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(genButton)
-                        .addGap(6, 6, 6)
-                        .addComponent(reButton))))
+                        .addComponent(nKey)))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -122,8 +127,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(lengthOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(nKeyOption, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(Label3))
+                        .addComponent(Label3)
+                        .addComponent(nKey, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(Label1)))
@@ -168,16 +173,20 @@ public class MainFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_lengthOptionActionPerformed
 
-    private void nKeyOptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nKeyOptionActionPerformed
-
-    }//GEN-LAST:event_nKeyOptionActionPerformed
-
     private void genButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_genButtonActionPerformed
         this.outTextArea.setText(null);
 
-        String[] keyForPrintOut = new String[nKeyOption.getSelectedIndex() + 1];
+        int n = 0;
+        try {
+            n = Integer.parseInt(nKey.getText());
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Enter Wrong Format.\nTry Again", null, n);
+            //System.exit(0); // If want to close program after popup deleted the comment sign
+        }
 
-        Input in = new Input(lengthOption.getSelectedIndex() + 6, nKeyOption.getSelectedIndex() + 1, typeOption.getSelectedIndex());
+        String[] keyForPrintOut = new String[n];
+
+        Input in = new Input(lengthOption.getSelectedIndex() + 6, n, typeOption.getSelectedIndex());
         Generate genOperater = new Generate(in);
         genOperater.selectTypeForGUI(in);
 
@@ -185,8 +194,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         int i = 0;
         while (i < keyForPrintOut.length) {
-            
-            this.outTextArea.insert(keyForPrintOut[i]+"\n", 0);
+            this.outTextArea.insert(keyForPrintOut[i] + "\n", 0);
             i++;
         }
 
@@ -196,6 +204,14 @@ public class MainFrame extends javax.swing.JFrame {
     private void reButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reButtonActionPerformed
         this.outTextArea.setText(null);
     }//GEN-LAST:event_reButtonActionPerformed
+
+    private void nKeyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nKeyActionPerformed
+
+    }//GEN-LAST:event_nKeyActionPerformed
+
+    private void nKeyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nKeyMouseClicked
+        this.nKey.setText(null);
+    }//GEN-LAST:event_nKeyMouseClicked
 
     /**
      * @param args the command line arguments
@@ -219,9 +235,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox lengthOption;
-    private javax.swing.JComboBox nKeyOption;
+    private javax.swing.JTextField nKey;
     private javax.swing.JTextArea outTextArea;
     private javax.swing.JButton reButton;
     private javax.swing.JComboBox typeOption;
     // End of variables declaration//GEN-END:variables
+
 }
